@@ -17,7 +17,7 @@ export type HealthData = {
 export type ParseOptions = {
   /** ignore records before this fixed day; overrides `historyYears` */
   cutoff?: string;
-  /** otherwise keep this many years of history before the export date (default 2) */
+  /** otherwise keep this many years of history before the export date (default 4) */
   historyYears?: number;
   hrRecentDays?: number;
   /** clock used for age and generatedAt; injectable for tests */
@@ -73,7 +73,7 @@ type Session = SleepSession & { startMs: number; endMs: number; wakeDay: string 
 export function createParser(opts: ParseOptions = {}) {
   const HR_RECENT_DAYS = opts.hrRecentDays ?? 14;
   const now = opts.now ?? Date.now();
-  const years = opts.historyYears ?? 2;
+  const years = opts.historyYears ?? 4;
   // a window relative to the export, so anyone's export works however old or new it is. Until <ExportDate> is read
   // (it comes before the records) the window ends today
   let CUTOFF = opts.cutoff ?? yearsBefore(new Date(now).toISOString(), years);
