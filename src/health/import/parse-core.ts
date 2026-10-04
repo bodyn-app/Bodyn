@@ -15,8 +15,10 @@ export type HealthData = {
 };
 
 export type ParseOptions = {
-  /** ignore records before this day (Watch data starts 2025-02-28) */
+  /** ignore records before this fixed day; overrides `historyYears` */
   cutoff?: string;
+  /** otherwise keep this many years of history before the export date (default 2) */
+  historyYears?: number;
   hrRecentDays?: number;
   /** clock used for age and generatedAt; injectable for tests */
   now?: number;
@@ -59,6 +61,8 @@ const epoch = (s: string) => Date.parse(`${s.slice(0, 10)}T${s.slice(11, 19)}${s
 const round = (n: number | null | undefined, d = 1): number | null => (n == null || Number.isNaN(n) ? null : Math.round(n * 10 ** d) / 10 ** d);
 const mean = (a: number[]) => (a.length ? a.reduce((x, y) => x + y, 0) / a.length : null);
 const zeros = () => new Array<number>(24).fill(0);
+/** the same calendar day n years earlier, as a string for comparisons ("2026-09-23" → "2024-09-23") */
+const yearsBefore = (day: string, n: number) => `${+day.slice(0, 4) - n}${day.slice(4, 10)}`;
 const prevDay = (day: string) => new Date(Date.parse(day) - 864e5).toISOString().slice(0, 10);
 
 type Source = { total: number; hourly: number[] };
@@ -67,9 +71,12 @@ type SleepRec = [number, number, Stage, string, string]; // [startEpoch, endEpoc
 type Session = SleepSession & { startMs: number; endMs: number; wakeDay: string };
 
 export function createParser(opts: ParseOptions = {}) {
-  const CUTOFF = opts.cutoff ?? '2025-02-01';
   const HR_RECENT_DAYS = opts.hrRecentDays ?? 14;
   const now = opts.now ?? Date.now();
+  const years = opts.historyYears ?? 2;
+  // a window relative to the export, so anyone's export works however old or new it is. Until <ExportDate> is read
+  // (it comes before the records) the window ends today
+  let CUTOFF = opts.cutoff ?? yearsBefore(new Date(now).toISOString(), years);
 
   // per-source accumulators for additive metrics: acc[metric][day][source] = { total, hourly[24] }
   const acc: Record<'steps' | 'dist' | 'active' | 'basal', Record<string, Record<string, Source>>> = { steps: {}, dist: {}, active: {}, basal: {} };
@@ -180,6 +187,9 @@ export function createParser(opts: ParseOptions = {}) {
     } else if (curWorkout && line.startsWith('</Workout>')) {
       workouts.push(curWorkout);
       curWorkout = null;
+    } else if (c1 === 69 /* E */ && line.startsWith('<ExportDate ')) {
+      const v = attrs(line).value;
+      if (!opts.cutoff && v && /^\d{4}-\d{2}-\d{2}/.test(v)) CUTOFF = yearsBefore(v, years);
     } else if (c1 === 77 /* M */ && line.startsWith('<Me ')) {
       const a = attrs(line);
       const dob = a.HKCharacteristicTypeIdentifierDateOfBirth;

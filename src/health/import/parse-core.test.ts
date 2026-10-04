@@ -104,16 +104,29 @@ describe('createParser', () => {
     expect(d.profile).toEqual({ age: 36, sex: 'female', heightCm: 170, weightKg: 69.5, bodyFatPct: 21.4 });
   });
 
-  it('ignores records before the cutoff and lines it does not know (header, DTD)', () => {
+  it('keeps the two years before the export date and ignores lines it does not know (header, DTD)', () => {
     const d = parse([
       '<?xml version="1.0" encoding="UTF-8"?>',
       '<!DOCTYPE HealthData [',
       '<!ENTITY boom "aaaaaaaaaa">',
       ']>',
-      rec(`${Q}StepCount`, '2024-12-31 08:00:00', 999),
+      ' <ExportDate value="2026-09-23 14:01:21 +0300"/>',
+      rec(`${Q}StepCount`, '2024-09-22 08:00:00', 999),
+      rec(`${Q}StepCount`, '2024-09-23 08:00:00', 5),
       rec(`${Q}StepCount`, '2026-09-10 08:00:00', 10),
     ]);
-    expect(Object.keys(d.days)).toEqual(['2026-09-10']);
+    expect(Object.keys(d.days)).toEqual(['2024-09-23', '2026-09-10']);
+  });
+
+  it('measures the window from the export date, so an old export still imports', () => {
+    const d = parse([' <ExportDate value="2021-05-01 09:00:00 +0000"/>', rec(`${Q}StepCount`, '2020-03-10 08:00:00', 42)]);
+    expect(d.days['2020-03-10'].steps).toBe(42);
+  });
+
+  it('falls back to two years before today without an export date, and a fixed cutoff overrides both', () => {
+    const lines = [rec(`${Q}StepCount`, '2024-09-29 08:00:00', 1), rec(`${Q}StepCount`, '2024-10-01 08:00:00', 2)];
+    expect(Object.keys(parse(lines).days)).toEqual(['2024-10-01']);
+    expect(Object.keys(parse([' <ExportDate value="2026-09-23 14:01:21 +0300"/>', ...lines], { cutoff: '2024-01-01' }).days)).toEqual(['2024-09-29', '2024-10-01']);
   });
 
   it('fails clearly when the export has no usable records', () => {
