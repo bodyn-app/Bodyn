@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="%LANG_ISO_CODE%">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>%WEB_TITLE%</title>
+    <!-- Home-screen app (iPhone: Safari → Share → Add to Home Screen). Paths include the GitHub Pages base (/Bodyn). -->
+    <link rel="manifest" href="/Bodyn/manifest.json" />
+    <link rel="apple-touch-icon" href="/Bodyn/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/Bodyn/icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Bodyn" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="robots" content="noindex" />
+    <!-- Production builds get a Content-Security-Policy injected here by scripts/web-postexport.mjs -->
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      html,
+      body {
+        height: 100%;
+        background-color: #0b0d0a;
+      }
+      body {
+        overflow: hidden;
+      }
+      #root {
+        display: flex;
+        height: 100%;
+        flex: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run Bodyn.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

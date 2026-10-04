@@ -1,0 +1,62 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+example
+
+# generated native folders
+/ios
+/android
+
+# sensitive raw health data (never commit)
+/data/raw/
+/data/tmp/
+
+# derived personal health fixtures (regenerate with scripts/parse-health-export.mjs)
+/src/data/fixtures/
+
+# vitest JSON report, input for scripts/test-inventory.py
+.test-report.json
+
+# never commit an Apple Health export, wherever it lands
+*.zip
+export*.xml
+export_cda.xml
+**/apple_health_export/
+
+# third-party design reference (kept locally, not published)
+/reference ur design.jpg

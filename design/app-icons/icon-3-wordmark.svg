@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Concept 3: the word "bodyn" in round monoline letters, the "o" is a lime ring -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B3022"/>
+      <stop offset="1" stop-color="#0E1A12"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#B8F53D" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#B8F53D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cream" gradientUnits="userSpaceOnUse" x1="0" y1="318" x2="0" y2="672">
+      <stop offset="0" stop-color="#E9F3DB"/>
+      <stop offset="1" stop-color="#C3DFA3"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#halo)"/>
+  <g transform="translate(512 512) scale(1.1) translate(-512 -495) translate(0 0)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="44">
+    <g stroke="url(#cream)">
+      <!-- b -->
+      <path d="M190 340 V560"/>
+      <circle cx="240" cy="510" r="50"/>
+      <!-- d -->
+      <circle cx="512" cy="510" r="50"/>
+      <path d="M562 340 V560"/>
+      <!-- y -->
+      <path d="M598 460 L660 555"/>
+      <path d="M698 460 L626 650"/>
+      <!-- n -->
+      <path d="M734 460 V560"/>
+      <path d="M734 510 A50 50 0 0 1 834 510 V560"/>
+    </g>
+    <!-- o: the ring -->
+    <circle cx="376" cy="510" r="50" stroke="#B8F53D" opacity="0.45" filter="url(#glow)"/>
+    <circle cx="376" cy="510" r="50" stroke="#C9F26B"/>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Concept 5: light icon, a B that blends soft lavender into soft green (two of the app's ring colours) -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EEF4E3"/>
+      <stop offset="1" stop-color="#D5E4C3"/>
+    </linearGradient>
+    <linearGradient id="duo" gradientUnits="userSpaceOnUse" x1="0" y1="212" x2="0" y2="824">
+      <stop offset="0" stop-color="#9A8AF0"/>
+      <stop offset="0.5" stop-color="#8FAEE6"/>
+      <stop offset="1" stop-color="#78C338"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <path id="b" d="M335 268 V768 M335 268 H500 A107 107 0 0 1 500 482 H335 M335 482 H525 A143 143 0 0 1 525 768 H335"/>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <g transform="translate(0,-6)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="112">
+    <use href="#b" stroke="#7E9A5A" opacity="0.28" filter="url(#shadow)" transform="translate(0,24)"/>
+    <use href="#b" stroke="url(#duo)"/>
+  </g>
+</svg>

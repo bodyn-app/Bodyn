@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Concept 9: light icon, a lowercase b: a deep-green stem and a lime ring -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F5F8EF"/>
+      <stop offset="1" stop-color="#DCE8CB"/>
+    </linearGradient>
+    <linearGradient id="ring" gradientUnits="userSpaceOnUse" x1="350" y1="450" x2="700" y2="770">
+      <stop offset="0" stop-color="#A9E05C"/>
+      <stop offset="1" stop-color="#6FB82F"/>
+    </linearGradient>
+    <linearGradient id="stem" gradientUnits="userSpaceOnUse" x1="0" y1="212" x2="0" y2="768">
+      <stop offset="0" stop-color="#2F6B3D"/>
+      <stop offset="1" stop-color="#1F4A2B"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feGaussianBlur stdDeviation="20"/></filter>
+    <circle id="c" cx="540" cy="575" r="140"/>
+    <path id="s" d="M400 250 V715"/>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <g transform="translate(-14,28)" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="96">
+    <g opacity="0.22" filter="url(#shadow)" transform="translate(0,22)" stroke="#5E7F45">
+      <use href="#c"/><use href="#s"/>
+    </g>
+    <use href="#c" stroke="url(#ring)"/>
+    <use href="#s" stroke="url(#stem)"/>
+  </g>
+</svg>

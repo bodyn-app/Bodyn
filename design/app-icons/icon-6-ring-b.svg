@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Concept 6: an open progress ring around a B, like the rings on Home -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1B3022"/>
+      <stop offset="1" stop-color="#0E1A12"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="52%">
+      <stop offset="0" stop-color="#B8F53D" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#B8F53D" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ring" gradientUnits="userSpaceOnUse" x1="200" y1="200" x2="820" y2="840">
+      <stop offset="0" stop-color="#DDF9A2"/>
+      <stop offset="1" stop-color="#8FCB3A"/>
+    </linearGradient>
+    <linearGradient id="letter" gradientUnits="userSpaceOnUse" x1="0" y1="340" x2="0" y2="690">
+      <stop offset="0" stop-color="#EEFBCF"/>
+      <stop offset="1" stop-color="#BCE57A"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="22"/></filter>
+    <circle id="r" cx="512" cy="512" r="300" stroke-dasharray="1500 385" transform="rotate(-13 512 512)"/>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#halo)"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <use href="#r" stroke="#B8F53D" stroke-width="60" opacity="0.32" filter="url(#glow)"/>
+    <use href="#r" stroke="url(#ring)" stroke-width="60"/>
+    <path d="M440 372 V652 M440 372 H510 A70 70 0 0 1 510 512 H440 M440 512 H522 A70 70 0 0 1 522 652 H440" stroke="url(#letter)" stroke-width="62"/>
+  </g>
+</svg>
