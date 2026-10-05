@@ -20,8 +20,19 @@ function pickZip(): Promise<File | null> {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.zip,application/zip';
-    input.onchange = () => resolve(input.files?.[0] ?? null);
-    input.oncancel = () => resolve(null);
+    // The input must stay in the page while the picker is open: iOS Safari can discard a detached input while
+    // the user is in Files, and then the chosen file never arrives (picking "did nothing" until the 3rd or 4th try).
+    input.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none;';
+    document.body.appendChild(input);
+    let settled = false;
+    const finish = (file: File | null) => {
+      if (settled) return;
+      settled = true;
+      input.remove();
+      resolve(file);
+    };
+    input.addEventListener('change', () => finish(input.files?.[0] ?? null));
+    input.addEventListener('cancel', () => finish(null));
     input.click();
   });
 }
