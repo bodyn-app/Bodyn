@@ -28,18 +28,18 @@ switched on by hand, once.
   - `git config --global user.email "331589508+mohamedyounes95@users.noreply.github.com"`
   - GitHub → Settings → Emails → tick **Keep my email addresses private** and
     **Block command line pushes that expose my email**.
-- [ ] **Two-factor authentication**: GitHub → Settings → Password and authentication → enable 2FA (passkey or
+- [x] **Two-factor authentication**: GitHub → Settings → Password and authentication → enable 2FA (passkey or
       authenticator app).
-- [ ] **Protect `main`**: repo → Settings → Rules → Rulesets → New branch ruleset → target `main` →
-      tick *Restrict deletions*, *Block force pushes*, *Require a pull request before merging*. Add yourself to
-      the bypass list so you can still push your own changes.
+- [x] **Protect `main`**: repo → Settings → Rules → Rulesets → New branch ruleset → target `main` →
+      tick *Restrict deletions*, *Block force pushes*, *Require a pull request before merging*. Org admins (you)
+      are on the bypass list, so your own pushes still go straight to `main`.
 - [x] **Pages from Actions only**: repo → Settings → Pages → Source: **GitHub Actions**.
-- [ ] **Org 2FA**: org `bodyn-app` → Settings → Authentication security → *Require two-factor authentication*.
-- [ ] **Deploys only from main**: repo → Settings → Environments → `github-pages` → Deployment branches →
+- [x] **Org 2FA**: org `bodyn-app` → Settings → Authentication security → *Require two-factor authentication*.
+- [x] **Deploys only from main**: repo → Settings → Environments → `github-pages` → Deployment branches →
       *Selected branches* → `main`.
-- [ ] **Security alerts**: repo → Settings → Security → enable **Dependabot alerts**, **Secret scanning**
+- [x] **Security alerts**: repo → Settings → Security → enable **Dependabot alerts**, **Secret scanning**
       and **Push protection**.
-- [ ] **Actions can't be hijacked by forks**: repo → Settings → Actions → General → *Fork pull request workflows*
+- [x] **Actions can't be hijacked by forks**: repo → Settings → Actions → General → *Fork pull request workflows*
       → require approval for all outside collaborators.
 - [ ] **Keep `bodyn-app` for Bodyn only.** Every Pages site under `bodyn-app.github.io/*` shares one browser origin
       and could read Bodyn's storage, so never add another Pages site to this organization. (Your personal
