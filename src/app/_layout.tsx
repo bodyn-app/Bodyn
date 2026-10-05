@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Welcome } from '@/components/welcome';
 import { hasHealthData } from '@/health';
 import { registerServiceWorker } from '@/lib/service-worker';
+import { useWebChrome } from '@/lib/web-chrome';
 import { useNotificationSetup } from '@/notifications/use-setup';
 import { useDefaultTab } from '@/state/default-tab';
 import { useTheme } from '@/theme';
@@ -12,6 +13,7 @@ import { useTheme } from '@/theme';
 export default function RootLayout() {
   const { colors, scheme } = useTheme();
   useNotificationSetup();
+  useWebChrome(colors.bg);
   const router = useRouter();
   const { tab, hydrated } = useDefaultTab();
   const opened = useRef(false);

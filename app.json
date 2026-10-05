@@ -24,12 +24,16 @@
       "favicon": "./assets/images/favicon.png",
       "name": "Bodyn",
       "shortName": "Bodyn",
-      "themeColor": "#0B0D0A",
       "backgroundColor": "#0B0D0A"
     },
     "plugins": [
       "expo-router",
-      ["expo-notifications", { "color": "#86C400" }],
+      [
+        "expo-notifications",
+        {
+          "color": "#86C400"
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -46,4 +50,3 @@
     }
   }
 }
-

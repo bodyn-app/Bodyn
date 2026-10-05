@@ -11,7 +11,11 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Bodyn" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- "default": iOS keeps the clock area for itself, so content never scrolls (and blurs) under it and the
+         page gets the full height. "black-translucent" caused a black strip under the tab bar on iPhone. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F3F5EF" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B0D0A" />
     <meta name="referrer" content="no-referrer" />
     <meta name="robots" content="noindex" />
     <!-- Production builds get a Content-Security-Policy injected here by scripts/web-postexport.mjs -->
@@ -20,15 +24,22 @@
       html,
       body {
         height: 100%;
-        background-color: #0b0d0a;
+        background-color: #f3f5ef;
+      }
+      @media (prefers-color-scheme: dark) {
+        html,
+        body {
+          background-color: #0b0d0a;
+        }
       }
       body {
         overflow: hidden;
       }
+      /* pinned to the screen edges rather than height: 100%, which iOS home-screen apps can compute short */
       #root {
         display: flex;
-        height: 100%;
-        flex: 1;
+        position: fixed;
+        inset: 0;
       }
     </style>
   </head>
